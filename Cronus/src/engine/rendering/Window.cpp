@@ -1,16 +1,25 @@
 #include "Window.h"
 
-
 #include <iostream>
 
 #include <core/CoreEngine.h>
 
-Window::Window()
-    :m_width(0), m_height(0)
+void GLAPIENTRY
+MessageCallback(GLenum source,
+    GLenum type,
+    GLuint id,
+    GLenum severity,
+    GLsizei length,
+    const GLchar* message,
+    const void* userParam)
 {
+    fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+        (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+        type, severity, message);
 }
 
-void Window::ShowWindow(int width, int height, const char title[])
+Window::Window(int width, int height, const char title[])
+    :m_width(width), m_height(height)
 {
     m_width = width;
     m_height = height;
@@ -19,7 +28,7 @@ void Window::ShowWindow(int width, int height, const char title[])
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    m_window = glfwCreateWindow(m_width, m_width, title, NULL, NULL);
+    m_window = glfwCreateWindow(width, height, title, NULL, NULL);
     if (m_window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -34,13 +43,21 @@ void Window::ShowWindow(int width, int height, const char title[])
         std::cout << "Failed to initialize GLAD" << std::endl;
         return;
     }
-}
 
+    // During init, enable debug output
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(MessageCallback, 0);
+}
 
 
 bool Window::ShouldClose()
 {
     return glfwWindowShouldClose(m_window);
+}
+
+void Window::Resize(int width, int height)
+{
+    glViewport(0, 0, width, height);
 }
 
 void Window::Cleanup()

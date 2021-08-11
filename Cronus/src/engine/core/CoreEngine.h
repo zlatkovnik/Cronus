@@ -1,12 +1,15 @@
 #pragma once
-#include <rendering/Window.h>
+
 class Scene;
+class Window;
+class Renderer;
 
 class CoreEngine
 {
 private:
 	Scene *m_scene;
-	Window m_window;
+	Window *m_window;
+	Renderer* m_renderer;
 	int m_width, m_height;
 public:
 	CoreEngine(Scene *scene);

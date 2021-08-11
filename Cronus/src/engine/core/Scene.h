@@ -5,14 +5,14 @@ class Renderer;
 
 class Scene
 {
-private:
+protected:
 	GameObject *m_root;
-	GameObject* GetRootObject();
 public:
-	void Start();
-	void Update(float deltaTime);
-	void Render(Renderer *renderer);
+	virtual void Start() = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Render(Renderer *renderer) = 0;
 
 	void AddObject(GameObject *object);
+	GameObject* GetRootObject();
 };
 

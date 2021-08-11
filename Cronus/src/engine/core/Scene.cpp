@@ -10,19 +10,7 @@ GameObject* Scene::GetRootObject()
 	return m_root;
 }
 
-void Scene::Start()
-{
-	GetRootObject()->Start();
-}
-
-void Scene::Update(float deltaTime)
-{
-}
-
-void Scene::Render(Renderer *renderer)
-{
-}
-
 void Scene::AddObject(GameObject *object)
 {
+	GetRootObject()->AddChild(object);
 }
