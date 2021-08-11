@@ -4,7 +4,6 @@
 
 GameObject::GameObject()
 {
-	m_engine = nullptr;
 }
 
 void GameObject::AddChild(GameObject *child)

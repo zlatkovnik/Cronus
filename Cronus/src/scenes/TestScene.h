@@ -5,6 +5,7 @@
 #include <rendering/Mesh.h>
 #include <rendering/Renderer.h>
 #include <components/MeshRenderer.h>
+#include <components/Camera.h>
 
 #include <vector>
 

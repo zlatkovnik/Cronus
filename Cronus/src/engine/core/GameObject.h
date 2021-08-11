@@ -16,7 +16,6 @@ private:
 	std::vector<GameObject*> m_children;
 	std::vector<Component*> m_components;
 	Transform m_transform;
-	CoreEngine *m_engine;
 public:
 	GameObject();
 	void AddChild(GameObject* child);

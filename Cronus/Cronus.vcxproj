@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\components\Camera.cpp" />
     <ClCompile Include="src\engine\components\MeshRenderer.cpp" />
     <ClCompile Include="src\engine\rendering\Mesh.cpp" />
     <ClCompile Include="src\engine\core\CoreEngine.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\engine\rendering\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\components\Camera.h" />
     <ClInclude Include="src\engine\components\MeshRenderer.h" />
     <ClInclude Include="src\engine\rendering\Mesh.h" />
     <ClInclude Include="src\engine\core\CoreEngine.h" />
@@ -168,6 +170,8 @@
     <ClInclude Include="src\engine\core\Scene.h" />
     <ClInclude Include="src\engine\core\Transform.h" />
     <ClInclude Include="src\engine\rendering\Window.h" />
+    <ClInclude Include="src\engine\util\WindowCallbackObserver.h" />
+    <ClInclude Include="src\engine\util\WindowCallbackPublisher.h" />
     <ClInclude Include="src\scenes\TestScene.h" />
   </ItemGroup>
   <ItemGroup>

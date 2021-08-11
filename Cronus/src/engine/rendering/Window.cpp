@@ -18,6 +18,39 @@ MessageCallback(GLenum source,
         type, severity, message);
 }
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    auto observers = Window::GetInstance()->GetObservers();
+    for (int i = 0; i < observers.size(); i++) {
+        observers[i]->KeyInputUpdate(key);
+    }
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    auto observers = Window::GetInstance()->GetObservers();
+    for (int i = 0; i < observers.size(); i++) {
+        observers[i]->FrameBufferSizeUpdate(width, height);
+    }
+}
+
+void mouse_callback(GLFWwindow* window, double xPos, double yPos)
+{
+    auto observers = Window::GetInstance()->GetObservers();
+    for (int i = 0; i < observers.size(); i++) {
+        observers[i]->MouseInputUpdate(xPos, yPos);
+    }
+}
+
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
+{
+    auto observers = Window::GetInstance()->GetObservers();
+    for (int i = 0; i < observers.size(); i++) {
+        observers[i]->ScrollInputUpdate(xOffset, yOffset);
+    }
+}
+
+Window* Window::m_instance = nullptr;
+
 Window::Window(int width, int height, const char title[])
     :m_width(width), m_height(height)
 {
@@ -36,7 +69,11 @@ Window::Window(int width, int height, const char title[])
         return;
     }
     glfwMakeContextCurrent(m_window);
-    //glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    //Callbacks
+    glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(m_window, mouse_callback);
+    glfwSetScrollCallback(m_window, scroll_callback);
+    glfwSetKeyCallback(m_window, key_callback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -47,6 +84,8 @@ Window::Window(int width, int height, const char title[])
     // During init, enable debug output
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
+
+    m_instance = this;
 }
 
 
@@ -80,3 +119,22 @@ void Window::PollEvents()
 {
     glfwPollEvents();
 }
+
+Window* Window::GetInstance()
+{
+    if (m_instance == nullptr) {
+        std::cout << "NO WINDOW INSTANCE" << std::endl;
+    }
+    return m_instance;
+}
+
+void Window::RegisterObserver(WindowCallbackObserver* observer)
+{
+    m_observers.push_back(observer);
+}
+
+void Window::UnregisterObserver(WindowCallbackObserver* observer)
+{
+    //No need...
+}
+
