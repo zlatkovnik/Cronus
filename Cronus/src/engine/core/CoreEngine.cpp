@@ -28,7 +28,7 @@ void CoreEngine::Start(int width, int height, const char title[])
 {
     //Izmestiti ovo
     GameObject* cameraObject = new GameObject();
-    Camera* cameraComponent = new Camera(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+    Camera* cameraComponent = new Camera(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     cameraObject->AddComponent(cameraComponent);
     CoreEngine::GetInstance()->SetMainCamera(cameraComponent);
     Window::GetInstance()->RegisterObserver(cameraComponent);
@@ -36,10 +36,16 @@ void CoreEngine::Start(int width, int height, const char title[])
     m_window->Resize(width, height);
     m_scene->Start();
 
+    m_lastTime = glfwGetTime();
+
     while (!m_window->ShouldClose()) {
         m_window->ClearScreen(0.2f, 0.3f, 0.3f, 1.0f);
+        m_window->ClearBuffers(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        m_scene->Update(0.0f);
+        float currentTime = glfwGetTime();
+        float deltaTime = currentTime - m_lastTime;
+        m_lastTime = currentTime;
+        m_scene->Update(deltaTime);
         m_scene->Render(m_renderer);
 
         m_window->SwapBuffers();

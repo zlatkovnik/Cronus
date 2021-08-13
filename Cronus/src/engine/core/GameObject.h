@@ -15,7 +15,7 @@ class GameObject
 private:
 	std::vector<GameObject*> m_children;
 	std::vector<Component*> m_components;
-	Transform m_transform;
+	Transform* m_transform;
 public:
 	GameObject();
 	void AddChild(GameObject* child);

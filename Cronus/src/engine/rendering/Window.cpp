@@ -19,6 +19,10 @@ MessageCallback(GLenum source,
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_ESCAPE) {
+        glfwSetWindowShouldClose(window, true);
+    }
+
     auto observers = Window::GetInstance()->GetObservers();
     for (int i = 0; i < observers.size(); i++) {
         observers[i]->KeyInputUpdate(key);
@@ -69,6 +73,7 @@ Window::Window(int width, int height, const char title[])
         return;
     }
     glfwMakeContextCurrent(m_window);
+    glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     //Callbacks
     glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
     glfwSetCursorPosCallback(m_window, mouse_callback);
@@ -107,7 +112,11 @@ void Window::Cleanup()
 void Window::ClearScreen(float r, float g, float b, float a)
 {
     glClearColor(r, g, b, a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Window::ClearBuffers(unsigned int flags)
+{
+    glClear(flags);
 }
 
 void Window::SwapBuffers()
@@ -126,6 +135,12 @@ Window* Window::GetInstance()
         std::cout << "NO WINDOW INSTANCE" << std::endl;
     }
     return m_instance;
+}
+
+void Window::GetSize(int* width, int* height)
+{
+    *width = m_width;
+    *height = m_height;
 }
 
 void Window::RegisterObserver(WindowCallbackObserver* observer)

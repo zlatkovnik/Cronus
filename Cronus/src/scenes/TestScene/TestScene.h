@@ -9,6 +9,8 @@
 
 #include <vector>
 
+#include "Rotator.h"
+
 class TestScene: public Scene {
 	void Start() override {
 		std::vector<float> vertices = {
@@ -27,17 +29,11 @@ class TestScene: public Scene {
 		Component* meshRenderer = new MeshRenderer(mesh);
 		GameObject *triangle = new GameObject();
 		triangle->AddComponent(meshRenderer);
+		triangle->AddComponent(new Rotator());
+
 		
 		AddObject(triangle);
 
 		GetRootObject()->Start();
-	}
-
-	void Update(float deltaTime) override {
-
-	}
-
-	void Render(Renderer* renderer) override {
-		renderer->Render(GetRootObject());
 	}
 };

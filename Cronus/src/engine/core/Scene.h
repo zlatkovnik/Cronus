@@ -1,16 +1,22 @@
 #pragma once
 
-class GameObject;
-class Renderer;
+#include <core/GameObject.h>
+#include <rendering/Renderer.h>
 
 class Scene
 {
 protected:
 	GameObject *m_root;
 public:
-	virtual void Start() = 0;
-	virtual void Update(float deltaTime) = 0;
-	virtual void Render(Renderer *renderer) = 0;
+	virtual void Start() {
+		m_root->Start();
+	}
+	void Update(float deltaTime) {
+		m_root->Update(deltaTime);
+	};
+	void Render(Renderer* renderer) {
+		renderer->Render(GetRootObject());
+	};
 
 	void AddObject(GameObject *object);
 	GameObject* GetRootObject();

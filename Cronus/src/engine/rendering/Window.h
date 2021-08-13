@@ -25,10 +25,12 @@ public:
 	void Cleanup();
 
 	void ClearScreen(float r, float g, float b, float a);
+	void ClearBuffers(unsigned int flags);
 	void SwapBuffers();
 	void PollEvents();
 
 	static Window* GetInstance();
+	void GetSize(int* width, int* height);
 
 	void RegisterObserver(WindowCallbackObserver* observer) override;
 	void UnregisterObserver(WindowCallbackObserver* observer) override;

@@ -14,6 +14,8 @@ private:
 	int m_width, m_height;
 
 	static CoreEngine* m_instance;
+
+	float m_lastTime;
 public:
 	CoreEngine(Scene *scene);
 	void Start(int width, int height, const char title[]);
