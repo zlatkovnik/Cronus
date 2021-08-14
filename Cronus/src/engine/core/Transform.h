@@ -15,6 +15,8 @@ public:
 	Transform();
 	void Update();
 	void Rotate(glm::vec3 rotation, float angle);
+	void Translate(glm::vec3 translation);
+	void Move(glm::vec3 point);
 
 	glm::mat4 GetTransformMatrix();
 };

@@ -54,10 +54,10 @@
     <ClCompile Include="src\engine\rendering\Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\components\Component.cpp">
+    <ClCompile Include="src\engine\rendering\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\rendering\Texture.cpp">
+    <ClCompile Include="src\scenes\TestScene\Translator.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -28,7 +28,7 @@ void CoreEngine::Start(int width, int height, const char title[])
 {
     //Izmestiti ovo
     GameObject* cameraObject = new GameObject();
-    Camera* cameraComponent = new Camera(0.0f, 0.0f, 3.0f, 0.0f, 1.0f, 0.0f);
+    Camera* cameraComponent = new Camera(0.0f, 0.0f, 5.0f, 0.0f, 1.0f, 0.0f);
     cameraObject->AddComponent(cameraComponent);
     CoreEngine::GetInstance()->SetMainCamera(cameraComponent);
     Window::GetInstance()->RegisterObserver(cameraComponent);

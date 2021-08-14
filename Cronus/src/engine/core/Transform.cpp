@@ -32,8 +32,22 @@ void Transform::Rotate(glm::vec3 rotation, float angle)
 	}
 }
 
+void Transform::Translate(glm::vec3 translation)
+{
+	m_position += translation;
+}
+
+void Transform::Move(glm::vec3 point)
+{
+	m_position = point;
+}
+
 glm::mat4 Transform::GetTransformMatrix()
 {
-	glm::mat4 transformation = glm::rotate(glm::mat4(1.0f), glm::radians(m_pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 transformation = glm::translate(glm::mat4(1.0f), m_position);
+	transformation = glm::rotate(transformation, glm::radians(m_pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+	transformation = glm::rotate(transformation, glm::radians(m_yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+	transformation = glm::rotate(transformation, glm::radians(m_roll), glm::vec3(0.0f, 0.0f, 1.0f));
+
 	return transformation;
 }

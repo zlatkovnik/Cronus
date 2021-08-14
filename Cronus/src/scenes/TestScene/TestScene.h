@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "Rotator.h"
+#include "Translator.h"
 
 class TestScene: public Scene {
 	void Start() override {
@@ -68,12 +69,21 @@ class TestScene: public Scene {
 
 		Mesh* mesh = new Mesh(vertices, indices);
 		Component* meshRenderer = new MeshRenderer(mesh);
-		GameObject *triangle = new GameObject();
-		triangle->AddComponent(meshRenderer);
-		triangle->AddComponent(new Rotator());
+		GameObject *box = new GameObject();
+		box->AddComponent(meshRenderer);
+		box->AddComponent(new Rotator(glm::vec3(1.0f, 0.0f, 0.0f)));
 
+
+		Mesh* cloneMesh = new Mesh(vertices, indices);
+		Component* cloneMeshRenderer = new MeshRenderer(cloneMesh);
+		GameObject* cloneBox = new GameObject();
+		cloneBox->GetTransform()->Translate(glm::vec3(1.0f, 0.0f, 0.0f));
+		cloneBox->AddComponent(meshRenderer);
+		cloneBox->AddComponent(new Translator());
+		cloneBox->AddComponent(new Rotator(glm::vec3(1.0f, 1.0f, 0.0f)));
 		
-		AddObject(triangle);
+		AddObject(box);
+		AddObject(cloneBox);
 
 		GetRootObject()->Start();
 	}

@@ -145,7 +145,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\engine\components\Component.cpp" />
     <ClCompile Include="src\engine\rendering\Material.cpp" />
     <ClCompile Include="src\engine\components\Camera.cpp" />
     <ClCompile Include="src\engine\components\MeshRenderer.cpp" />
@@ -158,6 +157,7 @@
     <ClCompile Include="src\engine\core\GameObject.cpp" />
     <ClCompile Include="src\engine\core\Transform.cpp" />
     <ClCompile Include="src\engine\rendering\Texture.cpp" />
+    <ClCompile Include="src\scenes\TestScene\Translator.h" />
     <ClCompile Include="vendor\glad\glad.c" />
     <ClCompile Include="src\engine\rendering\Window.cpp" />
   </ItemGroup>
