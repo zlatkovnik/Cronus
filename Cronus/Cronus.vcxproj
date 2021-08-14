@@ -157,10 +157,13 @@
     <ClCompile Include="src\engine\rendering\Renderer.cpp" />
     <ClCompile Include="src\engine\core\GameObject.cpp" />
     <ClCompile Include="src\engine\core\Transform.cpp" />
+    <ClCompile Include="src\engine\rendering\Texture.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
     <ClCompile Include="src\engine\rendering\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\STB\stb_image.h" />
+    <ClInclude Include="src\engine\components\Light.h" />
     <ClInclude Include="src\engine\rendering\Material.h" />
     <ClInclude Include="src\engine\components\Camera.h" />
     <ClInclude Include="src\engine\components\MeshRenderer.h" />
@@ -177,10 +180,14 @@
     <ClInclude Include="src\engine\util\WindowCallbackPublisher.h" />
     <ClInclude Include="src\scenes\TestScene\Rotator.h" />
     <ClInclude Include="src\scenes\TestScene\TestScene.h" />
+    <ClInclude Include="src\engine\rendering\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.frag" />
     <None Include="res\shaders\basic.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\box.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

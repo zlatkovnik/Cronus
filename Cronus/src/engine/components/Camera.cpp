@@ -61,6 +61,13 @@ void Camera::FrameBufferSizeUpdate(int width, int height)
 
 void Camera::MouseInputUpdate(float xPos, float yPos)
 {
+    if (m_firstMouse)
+    {
+        m_lastPosX = xPos;
+        m_lastPosY = yPos;
+        m_firstMouse = false;
+    }
+
     float offsetX = xPos - m_lastPosX;
     float offsetY = m_lastPosY - yPos;
 

@@ -9,6 +9,7 @@
 #include <core/GameObject.h>
 #include <rendering/Shader.h>
 #include <rendering/Window.h>
+#include <rendering/Texture.h>
 
 Renderer::Renderer()
 	:m_camera(nullptr)
@@ -28,6 +29,10 @@ void Renderer::Render(GameObject* root)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	m_ambientShader->Use();
+	//POMERITI OVO KASNIJE
+	Texture tex("res/textures/box.jpg");
+	tex.Bind(0);
+	m_ambientShader->SetInt("diffuseTexture", 0);
 
 	root->Render(m_ambientShader, this);
 }

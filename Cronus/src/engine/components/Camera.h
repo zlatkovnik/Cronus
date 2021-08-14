@@ -23,6 +23,8 @@ private:
 
 	float m_movementSpeed = 2.5f;
 	float m_mouseSensitivity = 0.1f;
+
+	bool m_firstMouse = true;
 public:
 	Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw = -90.0f, float pitch = 0.0f);
 	glm::mat4 GetViewMatrix();

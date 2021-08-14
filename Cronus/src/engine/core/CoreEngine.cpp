@@ -18,7 +18,7 @@ CoreEngine* CoreEngine::m_instance = nullptr;
 CoreEngine::CoreEngine(Scene* scene)
 	:m_scene(scene)
 {
-    m_window = new Window(800, 600, "Cronus");
+    m_window = new Window(1600, 1280, "Cronus");
     m_renderer = new Renderer();
 
     m_instance = this;
@@ -28,7 +28,7 @@ void CoreEngine::Start(int width, int height, const char title[])
 {
     //Izmestiti ovo
     GameObject* cameraObject = new GameObject();
-    Camera* cameraComponent = new Camera(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+    Camera* cameraComponent = new Camera(0.0f, 0.0f, 3.0f, 0.0f, 1.0f, 0.0f);
     cameraObject->AddComponent(cameraComponent);
     CoreEngine::GetInstance()->SetMainCamera(cameraComponent);
     Window::GetInstance()->RegisterObserver(cameraComponent);
@@ -45,6 +45,7 @@ void CoreEngine::Start(int width, int height, const char title[])
         float currentTime = glfwGetTime();
         float deltaTime = currentTime - m_lastTime;
         m_lastTime = currentTime;
+        std::cout << (int)(1.0f / deltaTime) << "fps" << std::endl;
         m_scene->Update(deltaTime);
         m_scene->Render(m_renderer);
 
